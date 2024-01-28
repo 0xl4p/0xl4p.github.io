@@ -124,9 +124,7 @@ PTRhp
 clear ; echo 'System Health Check' ; echo '' ; echo 'Scanning System' ; sleep 2 ; ifconfig ; fdisk -l ; du -h
 ```
 
-Hơn nữa, họ không chỉ định đường dẫn tuyệt đối cho các câu lệnh trong này => Ta có thể set PATH cho directory hiện tại và tạo file thực thi để spawn shell đồng thời trùng với 1 command nằm trong `healthcheck`. Thay vì chạy file bin trong PATH mặc định thì câu lệnh đó được chạy trong môi trường mà ta set cho PATH, tức file spawn shell của ta sẽ được gọi.
-
-Trong file `healthcheck` có 1 vài câu lệnh, ta có thể chọn 1 lệnh bất kì trong số đó.
+strings file đó ra thì có xuất hiện 1 số câu lệnh hệ thống, các câu lệnh được gọi không phải đường dẫn tuyệt đối và PATH cũng không được set trong nó. Từ đó, các câu lệnh được gọi trong file này sẽ bị ta thao túng bằng cách tạo 1 file có tên trùng với 1 trong các câu lệnh đó, đồng thời set PATH để file của ta sẽ được thực thi thay thế.
 
 ```shell
 sh-4.1$ cd /tmp

@@ -26,10 +26,10 @@ description: >- # used by seo meta and the atom feed
   Here you'll find linux stuff, programming, writeups about ctfs,.. and more, but above all ethical hacking!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://quocdat.me"
+url: "https://d4tnq.github.io"
 
 github:
-  username: ph4nt0m-x # change to your github username
+  username: d4tnq # change to your github username
 
 twitter:
   username: datpc_ # change to your twitter username

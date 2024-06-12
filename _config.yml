@@ -18,7 +18,7 @@ timezone: Asia/Ho_Chi_Minh
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: d4tnq # the main title
+title: l4p # the main title
 
 tagline: Pentester # it will display as the sub-title
 
@@ -26,10 +26,10 @@ description: >- # used by seo meta and the atom feed
   Here you'll find linux stuff, programming, writeups about ctfs,.. and more, but above all ethical hacking!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://d4tnq.github.io"
+url: "https://0xl4p.github.io"
 
 github:
-  username: d4tnq # change to your github username
+  username: 0xl4p # change to your github username
 
 twitter:
   username: datpc_ # change to your twitter username

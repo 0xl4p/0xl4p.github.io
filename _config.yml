@@ -20,7 +20,7 @@ timezone: Asia/Ho_Chi_Minh
 
 title: V1nc3nt # the main title
 
-tagline: https://www.youtube.com/watch?v=WQieARZiY7Q # it will display as the sub-title
+tagline: Th3 St4rry N1ght # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Here you'll find linux stuff, programming, writeups about ctfs,.. and more, but above all ethical hacking!
@@ -32,7 +32,7 @@ github:
   username: 0xV1nc3nt # change to your github username
 
 twitter:
-  username: datpc_ # change to your twitter username
+  username: d4tnq # change to your twitter username
 
 social:
   # Change to your full name.
@@ -96,7 +96,7 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: ph4nt0m-x/quocdat.me_comments # <gh-username>/<repo>
+    repo: 0xV1nc3nt/quocdat.me_comments # <gh-username>/<repo>
     repo_id: R_kgDOJYbBmw
     category: General
     category_id: DIC_kwDOJYbBm84CV3p_

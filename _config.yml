@@ -18,18 +18,18 @@ timezone: Asia/Ho_Chi_Minh
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: l4p # the main title
+title: V1nc3nt # the main title
 
-tagline: Pentester # it will display as the sub-title
+tagline: https://www.youtube.com/watch?v=WQieARZiY7Q # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Here you'll find linux stuff, programming, writeups about ctfs,.. and more, but above all ethical hacking!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://0xl4p.github.io"
+url: "https://0xV1nc3nt.github.io"
 
 github:
-  username: 0xl4p # change to your github username
+  username: 0xV1nc3nt # change to your github username
 
 twitter:
   username: datpc_ # change to your twitter username
@@ -37,12 +37,12 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: dyl4n
+  name: v1nc3nt
   email: nqdat160602@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/datpc_ # change to your twitter homepage
-    - https://github.com/ph4nt0m-x # change to your github homepage
+    - https://twitter.com/d4tnq # change to your twitter homepage
+    - https://github.com/0xV1nc3nt # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username

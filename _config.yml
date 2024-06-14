@@ -26,7 +26,7 @@ description: >- # used by seo meta and the atom feed
   Here you'll find linux stuff, programming, writeups about ctfs,.. and more, but above all ethical hacking!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://l3vr0ne.github.io"
+url: "https://l3vr0ne.github.io" 
 
 github:
   username: l3vr0ne # change to your github username

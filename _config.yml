@@ -96,7 +96,7 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: 0xV1nc3nt/quocdat.me_comments # <gh-username>/<repo>
+    repo: l3vdr0n3/quocdat.me_comments # <gh-username>/<repo>
     repo_id: R_kgDOJYbBmw
     category: General
     category_id: DIC_kwDOJYbBm84CV3p_

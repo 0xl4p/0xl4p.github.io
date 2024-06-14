@@ -18,31 +18,31 @@ timezone: Asia/Ho_Chi_Minh
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: V1nc3nt # the main title
+title: L3vdr0n3 # the main title
 
-tagline: Th3 St4rry N1ght # it will display as the sub-title
+tagline: Pentester # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Here you'll find linux stuff, programming, writeups about ctfs,.. and more, but above all ethical hacking!
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://0xV1nc3nt.github.io"
+url: "https://l3vdr0n3.github.io"
 
 github:
-  username: 0xV1nc3nt # change to your github username
+  username: l3vdr0n3 # change to your github username
 
 twitter:
-  username: d4tnq # change to your twitter username
+  username: l3vdr0n3 # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: v1nc3nt
+  name: l3vdr0n3
   email: nqdat160602@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/d4tnq # change to your twitter homepage
-    - https://github.com/0xV1nc3nt # change to your github homepage
+    - https://twitter.com/l3vdr0n3 # change to your twitter homepage
+    - https://github.com/l3vdr0n3 # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username

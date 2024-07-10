@@ -6,6 +6,7 @@ categories: [Operating System]
 tags: [linux]
 render_with_liquid: false
 comments: true
+published: false
 image:
   path: /assets/img/thumbnails/linux-file-system.png
 ---

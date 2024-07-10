@@ -9,7 +9,7 @@ tags:
 render_with_liquid: false
 comments: true
 image:
-  path: "/thumbnails/Linux-File-Types.png"
+  path: "/assets/img/thumbnails/Linux-File-Types.png"
 published: false
 ---
 

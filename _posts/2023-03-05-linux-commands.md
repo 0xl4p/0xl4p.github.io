@@ -7,7 +7,7 @@ tags: [linux commands]
 render_with_liquid: false
 comments: true
 image:
-  path: /thumbnails/Linux-Commands.png
+  path: /assets/img/thumbnails/Linux-Commands.png
 published: false
 ---
 

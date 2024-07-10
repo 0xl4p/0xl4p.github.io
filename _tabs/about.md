@@ -4,4 +4,4 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-![Nguyen Quoc Dat](/thumbnails/quocdat.png)
+![Nguyen Quoc Dat](/assets/img/thumbnails/quocdat.png)

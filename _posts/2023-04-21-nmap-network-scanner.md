@@ -8,7 +8,7 @@ tags: [hacking, tools]
 render_with_liquid: false
 comments: true
 image:
-  path: /thumbnails/nmap.png
+  path: /assets/img/thumbnails/nmap.png
 ---
 
 ## Overview

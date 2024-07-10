@@ -6,8 +6,6 @@ categories:
   - VulnHub
 tags:
   - hacking
-
-pin: true
 ---
 
 Download [Healthcare VulnHub](https://www.vulnhub.com/entry/healthcare-1,522/){:target="\_blank"}.

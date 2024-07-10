@@ -6,7 +6,6 @@ categories:
   - VulnHub
 tags:
   - hacking
-pin: true
 ---
 
 Download [Devguru VulnHub](https://www.vulnhub.com/entry/devguru-1,620/){:target="\_blank"}.

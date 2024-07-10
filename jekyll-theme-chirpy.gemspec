@@ -32,5 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "jekyll-archives", "~> 2.2"
   spec.add_runtime_dependency "jekyll-sitemap", "~> 1.4"
   spec.add_runtime_dependency "jekyll-include-cache", "~> 0.2"
-
+  spec.add_dependency "sinatra", ">= 1.4", "< 4.0"
 end

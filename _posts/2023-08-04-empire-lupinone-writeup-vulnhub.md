@@ -64,7 +64,7 @@ Nmap done: 1 IP address (1 host up) scanned in 22.83 seconds
 
 Quét được 2 port open 22 và 80. Truy cập web xem nó mặt mũi như nào đã
 
-![lupinone web](/posts/lupinone/web.PNG)
+![lupinone web](/assets/img/posts/lupinone/web.PNG)
 
 Check source cũng không thấy gì đặc biệt. Thử liệt kê vài file phổ biến thì phát hiện `robots.txt` có thứ gì đó hay ho.
 
@@ -148,7 +148,7 @@ Tiếp tục enum để tìm ra file ssh key.
 ffuf -u http://10.0.2.11/~secret/.FUZZ -w /usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -fc 404,403,400 -e .txt,.html -ic -c
 ```
 
-![mysecret.txt](/posts/lupinone/mysecret.png)
+![mysecret.txt](/assets/img/posts/lupinone/mysecret.png)
 
 ```
 ┌──(kali㉿kali)-[~]
@@ -309,7 +309,7 @@ icex64@LupinOne:~$ ls -la /usr/lib/python3.9/webbrowser.py
 
 Overwrite lệnh `os.system('/bin/bash')` để gọi shell ngay sau khi thư viện này được gọi tới.
 
-![webbrowser](/posts/lupinone/webbrowser.png)
+![webbrowser](/assets/img/posts/lupinone/webbrowser.png)
 
 ```shell
 icex64@LupinOne:~$ sudo -u arsene /usr/bin/python3.9 /home/arsene/heist.py

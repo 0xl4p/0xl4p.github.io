@@ -17,7 +17,7 @@ Download: [Bizarre Adventure: Mrr3b0t VulnHub](https://www.vulnhub.com/entry/biz
 arp-scan -l
 ```
 
-![ip scan](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/ip.png)
+![ip scan](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/ip.png)
 _scan ip machine_
 
 ```shell
@@ -52,7 +52,7 @@ Nmap done: 1 IP address (1 host up) scanned in 149.34 seconds
 
 Quét được 4 cổng đang open, trong đó có 2 cổng đã quá quen thuộc 80 http và 20 ssh. Thử đi vào cổng 80 dịch vụ web:
 
-![web service](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/web-service.png)
+![web service](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/web-service.png)
 
 ## Enumeration
 
@@ -60,7 +60,7 @@ Quét được 4 cổng đang open, trong đó có 2 cổng đã quá quen thu�
 gobuster dir -u http://10.0.2.18/ -w /usr/share/wordlists/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
 ```
 
-![gobuster](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/gobuster.png)
+![gobuster](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/gobuster.png)
 
 Quét ra một số thư mục, trong đó có `/administrator` là 1 trang đăng nhập. Chưa có thông tin nên ta tiếp tục khai phá các thư mục còn lại xem tìm kiếm được gì không. Trong thư mục `/images`, phát hiện được 1 số tập tin hay ho:
 
@@ -85,7 +85,7 @@ Vậy là có thể thứ ta cần tìm sẽ nằm ở file `hidden.png` kia.
 zsteg hidden.png
 ```
 
-![zsteg](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/zsteg.png)
+![zsteg](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/zsteg.png)
 _Dùng zsteg extract được 1 dòng text thú vị_
 
 Với thông tin ở trên xác định được username là `mrrobot`, việc còn lại là tìm ra password.
@@ -98,29 +98,29 @@ username=mrrobot&pass=abc
 
 Body request cho thấy gói tin để xác thực user gửi lên server với 2 tham số `username`, `pass` và chúng đều được truyền dưới dạng cleartext. Dựa vào điều này ta hoàn toàn có thể bruteforce tham số `pass` với `username` là tham số đã biết.
 
-![password bruteforce](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/password-bruteforce.png)
+![password bruteforce](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/password-bruteforce.png)
 _Với wordlist có sẵn của Burp ta cũng có thể tìm ra được pass (hoặc một số wordlist thông dụng khác như rockyou.txt...)_
 
 Sau khi login vô `/administrator`, xuất hiện 1 trang upload.
 
-![Wappalyzer](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/programming-language.png)
+![Wappalyzer](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/programming-language.png)
 _Sử dụng Wappalyzer extension quét được một số thông tin, trong đó phát hiện được ngôn ngữ được chạy trên máy chủ là PHP_
 
 Đã biết ngôn ngữ chạy trên server rồi thì bước tiếp theo là tiến hành khai thác xem liệu server có chứa lỗ hổng file upload hay không.
 
-![upload payload](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/upload.png)
+![upload payload](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/upload.png)
 
 Có thể thấy, file php mà ta upload đã bị chặn, thay vào đó server chỉ cho phép upload ảnh có định dạng nằm trong whitelist jpg, jpeg, gif, png.
 
-![poc](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/poc.png)
+![poc](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/poc.png)
 
 Có thể phía backend filter không kĩ càng khi tách tên file thành mảng có 2 phần tử phân cách bởi dấu chấm và chỉ xem xét phần tử thứ 2 và coi nó như là đuôi file. Mà.. thằng HTTPD chỉ nhìn vào đuôi cuối cùng của tên file để xem xét có xử lý hay không nên ta có thể dễ dàng bypass như cách trên.
 
-![phpinfo](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/phpinfo.png)
+![phpinfo](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/phpinfo.png)
 
 Up reverse shell và tiến hành RCE.
 
-![RCE](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/rce.png)
+![RCE](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/rce.png)
 _RCE thành công_
 
 ## Privilege Escalation
@@ -171,7 +171,7 @@ Password@123
 
 Có 1 chuỗi chứa từ khóa Password, khả năng đây là mật khẩu có thể dùng được. Nhưng vẫn chưa chắc chắn về điều này nên tôi cứng đầu bruteforce để tìm ra password cho thằng `exploiter`. Sau gần 3 ngày treo máy zui zui, kết quả tìm ra cũng chính là password mà mình nghi ngờ.
 
-![exploiter password](https://ik.imagekit.io/dyl4n/posts/mrr3b0t/exploiter-password.PNG)
+![exploiter password](https://ik.imagekit.io/dyl4n/assets/img/posts/mrr3b0t/exploiter-password.PNG)
 
 ```shell
 www-data@mrr3b0t:/var/www/bf$ su exploiter

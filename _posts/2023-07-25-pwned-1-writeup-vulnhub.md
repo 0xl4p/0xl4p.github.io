@@ -14,7 +14,7 @@ Download [PWNED: 1](https://www.vulnhub.com/entry/pwned-1,507/){:target="\_blank
 
 ## Scanning
 
-![scan ip](/posts/pwned-1/scan-ip.png)
+![scan ip](/assets/img/posts/pwned-1/scan-ip.png)
 
 Tiến hành scan tất cả ports
 
@@ -22,7 +22,7 @@ Tiến hành scan tất cả ports
 nmap 10.0.2.8 -p- -sC -A
 ```
 
-![scan ports](/posts/pwned-1/scan-ports.png)
+![scan ports](/assets/img/posts/pwned-1/scan-ports.png)
 
 Có thể thấy, 3 ports dịch vụ đang mở là 21, 22 và 80.
 
@@ -30,7 +30,7 @@ Có thể thấy, 3 ports dịch vụ đang mở là 21, 22 và 80.
 
 Đi tới dịch vụ web, không tìm thấy thông tin gì từ đây
 
-![web](/posts/pwned-1/web.PNG)
+![web](/assets/img/posts/pwned-1/web.PNG)
 
 Tiến hành enumerate directories với `gobuster`.
 
@@ -38,35 +38,35 @@ Tiến hành enumerate directories với `gobuster`.
 gobuster dir -u http://10.0.2.8/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ```
 
-![enumerate directories](/posts/pwned-1/enum-dir.PNG)
+![enumerate directories](/assets/img/posts/pwned-1/enum-dir.PNG)
 
 Nhìn cái tên thôi cũng thấy `/hidden_text` có vẻ thú vị hơn mấy cái kia. Nhưng ở bất kì trường hợp nào, manh mối cũng đều có thể xuất hiện nên chúng ta không nên bỏ xót.
 
-![secret dictionary](/posts/pwned-1/secret_dic_file.PNG)
+![secret dictionary](/assets/img/posts/pwned-1/secret_dic_file.PNG)
 
 Check `/hidden_text` thấy có chứa 1 file `secret.dic`. Nội dung file này là 1 list các sub-directory. Khả năng 1 hoặc 1 vài trong số này có thể truy cập được. Lưu dic này và bruteforce để tìm ra đường dẫn hợp lệ.
 
-![pwned.vuln](/posts/pwned-1/pwned-vuln.PNG)
+![pwned.vuln](/assets/img/posts/pwned-1/pwned-vuln.PNG)
 
 Trong số này thì duy nhất `pwned.vuln` có status 200.
 
 ## Exploitation
 
-![pwned.vuln](/posts/pwned-1/check-pwned-vuln.PNG)
+![pwned.vuln](/assets/img/posts/pwned-1/check-pwned-vuln.PNG)
 
 Response trả về trong source có xuất hiện đoạn comment code php do dev sơ suất để lại. Hơn nữa, đoạn comment này đã leak tài khoản của 1 dịch vụ nào đó, check username và password cộng với việc port 21 mở ta có thể suy ra đây là user của ftp service.
 
-![login ftp](/posts/pwned-1/login-ftp.PNG)
+![login ftp](/assets/img/posts/pwned-1/login-ftp.PNG)
 
 Login thành công. Get 2 file trong folder share về và đọc chúng
 
-![clues](/posts/pwned-1/clues.PNG)
+![clues](/assets/img/posts/pwned-1/clues.PNG)
 
 1 file có chứa private key để login SSH nhưng chứa 1 số kí tự gây nhiễu, file còn lại tưởng vô nghĩa nhưng thực chất có chứa thông tin user. Có thể thu thập được username của SSH service từ đây đó là `cmc`. Sửa lại file private key và dùng dữ kiện tìm được để login SSH.
 
-![login ssh](/posts/pwned-1/login-ssh.PNG)
+![login ssh](/assets/img/posts/pwned-1/login-ssh.PNG)
 
-![user flag](/posts/pwned-1/user-flag.png)
+![user flag](/assets/img/posts/pwned-1/user-flag.png)
 
 Pwned cmc và capture cmc's flag thành công!
 
@@ -74,11 +74,11 @@ Pwned cmc và capture cmc's flag thành công!
 
 Kiểm tra quyền của user `cmc`
 
-![cmc privilege](/posts/pwned-1/cmc-privilege.png)
+![cmc privilege](/assets/img/posts/pwned-1/cmc-privilege.png)
 
 Có thể thấy, _cmc_ có quyền thực thi file script `/home/messenger.sh` với tư cách là user `hoangmongto`. Vậy điều cần làm tiếp theo là chiếm quyền của `hoangmongto` và còn 1 user flag nằm ở home directory của user này.
 
-![messenger.sh](/posts/pwned-1/messenger-sh.PNG)
+![messenger.sh](/assets/img/posts/pwned-1/messenger-sh.PNG)
 
 ### hoangmongto
 
@@ -88,13 +88,13 @@ Phân tích một chút về file script này, có 1 biến `msg` được nhậ
 sudo -u hoangmongto /home/messenger.sh
 ```
 
-![user flag-2](/posts/pwned-1/user-flag-2.png)
+![user flag-2](/assets/img/posts/pwned-1/user-flag-2.png)
 
 Spawn TTY shell và lấy được user flag thứ 2!
 
 ### root
 
-![id hoangmongto](/posts/pwned-1/id.png)
+![id hoangmongto](/assets/img/posts/pwned-1/id.png)
 
 Như chúng ta có thể thấy, `hoangmongto` thuộc group `docker`. May mắn thay, ta có thể leo lên root nhờ đó, đọc thêm [tại đây](https://flast101.github.io/docker-privesc/){:target="\_blank"}.
 
@@ -104,4 +104,4 @@ docker run -v /:/mnt --rm -it alpine chroot /mnt sh
 
 Payload từ [GTFOBins](https://gtfobins.github.io/gtfobins/docker/){:target="\_blank"}
 
-![root flag](/posts/pwned-1/root-flag.PNG)
+![root flag](/assets/img/posts/pwned-1/root-flag.PNG)

@@ -111,11 +111,11 @@ Nmap done: 1 IP address (1 host up) scanned in 89.78 seconds
 
 Có 3 port đang mở, trong đó 22 và 80 đã quá quen thuộc rồi. Còn 8585 thì sao? Kết quả ở trên cho thấy cổng 8585 đang chạy 1 dịch vụ HTTP, vào trình duyệt web rồi xác định chính xác nó là cái gì
 
-![gitea](/posts/devguru/gitea.PNG)
+![gitea](/assets/img/posts/devguru/gitea.PNG)
 
 Gitea, một server Git, là nơi để lưu trữ và quản lý source code. Có thể thấy version Gitea đang chạy là v1.12.5, note lại để lát nữa khai thác. Giờ qua web cổng 80 xem mặt mũi nó ra sao
 
-![landing page](/posts/devguru/landing.PNG)
+![landing page](/assets/img/posts/devguru/landing.PNG)
 
 Chỉ là 1 trang landing, chưa có thông tin gì ở đây.
 
@@ -184,7 +184,7 @@ Vậy thì `.git` là gì?... Đại khái Git là một phần mềm giúp qu�
 
 Quay trở lại với lab, đã biết sự tồn tại của .git rồi, giờ làm thế nào để dump toàn bộ mã nguồn từ nó đây? Ở đây tôi sử dụng tools [GitHack](https://github.com/lijiejie/GitHack){:target="\_blank"}.
 
-![GitHack](/posts/devguru/githack.PNG)
+![GitHack](/assets/img/posts/devguru/githack.PNG)
 
 Rất nhanh chóng, tôi đã có toàn bộ mã nguồn của dự án trong tay :))
 
@@ -238,7 +238,7 @@ $ tree -L 2
 
 `adminer.php` là 1 trang quản trị csdl.
 
-![adminer login](/posts/devguru/adminer-login.PNG)
+![adminer login](/assets/img/posts/devguru/adminer-login.PNG)
 
 Ta có thể dễ dàng lấy tài khoản quản trị từ file `database.php` trong **config**.
 
@@ -274,7 +274,7 @@ $ cat config/database.php
 
 Lúc này đã vào được trang quản trị csdl, lướt 1 lúc thì thấy có 1 bảng liên quan đến backend users:
 
-![backend users](/posts/devguru/backend_users.PNG)
+![backend users](/assets/img/posts/devguru/backend_users.PNG)
 
 Ồ, có 1 record và là `is_superuser`, dùng cái này để login vô trang `/backend` ha. Có thể thấy mật khẩu đã được mã hóa bcrypt, Bcrypt là một dạng hash và rất khó để crack. Đến được đây rồi còn mất công crack với chả bruteforce chi nữa :)) generate ra cái bcrypt hash rồi ném vào đấy là xong rồi.
 
@@ -290,7 +290,7 @@ Generate một hash mới với mật khẩu là **password**
 
 Update mật khẩu và dùng nó để đăng nhập vào `/backend`
 
-![backend](/posts/devguru/backend.PNG)
+![backend](/assets/img/posts/devguru/backend.PNG)
 
 ### Remote Code Execution
 
@@ -308,7 +308,7 @@ function onStart() {
 
 `onStart` sẽ được gọi mỗi khi trang được load
 
-![poc](/posts/devguru/poc.PNG)
+![poc](/assets/img/posts/devguru/poc.PNG)
 
 Vậy là đã test RCE thành công, ta có thể chạy lệnh bất kì tại đây. Tạo payload reverse shell rồi chạy thôi, ở đây mình dùng PHP proc_open payload được generate từ [revshell.com](https://www.revshells.com/){:target="\_blank"}.
 
@@ -324,7 +324,7 @@ listening on [any] 9005 ...
 
 ```
 
-![RCE payload](/posts/devguru/RCE-payload.PNG)
+![RCE payload](/assets/img/posts/devguru/RCE-payload.PNG)
 
 Save lại và load lại trang `/poc`. Kiểm tra kết nối của listener:
 
@@ -372,11 +372,11 @@ Do là gitea cũng chạy db trên cổng 3306, trùng với **october cms**, n�
 
 Sau khi login thành công, loanh quanh thì thấy bảng user, vào thăm hỏi em nó tí.
 
-![user](/posts/devguru/user-table.PNG)
+![user](/assets/img/posts/devguru/user-table.PNG)
 
 Em nó có 1 record, vẫn là user frank nhưng lần này ở ngôi nhà khác, `gitea`.
 
-![frank gitea](/posts/devguru/frank-gitea.PNG)
+![frank gitea](/assets/img/posts/devguru/frank-gitea.PNG)
 
 Ở dưới trường passwd có thêm **passwd_hash_algo**, giá trị của nó cũng là thuật toán mã hóa cho mật khẩu của frank. Check lại file config của gitea một lần nữa:
 
@@ -388,11 +388,11 @@ PASSWORD_HASH_ALGO                       = pbkdf2
 
 Có thể thấy giá trị mặc định của **passwd_hash_algo** là pbkdf2. Ngoài ra, **passwd_hash_algo** chấp nhận 4 loại hash đó là: "argon2", "pbkdf2", "scrypt" or "bcrypt". Ây dà, có em "bcrypt" đã từng gặp ở ngôi nhà cũ của frank rồi. Giờ chỉ việc thay đổi thuật toán mã hóa về "bcrypt", đồng thời chèn cái passwd hash dưới dạng đó là xong.
 
-![frank gitea](/posts/devguru/frank-gitea-1.PNG)
+![frank gitea](/assets/img/posts/devguru/frank-gitea-1.PNG)
 
 Ném vào login vô gitea cổng 8585
 
-![gitea home](/posts/devguru/gitea-home.PNG)
+![gitea home](/assets/img/posts/devguru/gitea-home.PNG)
 
 Gitea v1.12.5 có chứa 1 lỗ hổng dẫn tới RCE, có mã [CVE-2020-14144](https://www.cvedetails.com/cve/CVE-2020-14144/){:target="\_blank"}. Nếu khai thác lỗi này thành công, ta có thể lấy được shell của thằng frank chạy trong hệ thống.
 

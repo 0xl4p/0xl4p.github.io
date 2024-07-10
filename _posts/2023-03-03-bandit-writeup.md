@@ -26,7 +26,7 @@ Back to wargame, I will use `https://bandit.labs.overthewire.org/` is the host, 
 ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 
-![bandit0 login](/posts/bandit-writeup/1.png)
+![bandit0 login](/assets/img/posts/bandit-writeup/1.png)
 
 All I need to do is read it!
 
@@ -49,7 +49,7 @@ The password for the next level is stored in a file called - located in the home
 ssh bandit1@bandit.labs.overthewire.org -p 2220
 ```
 
-![dashed filename](/posts/bandit-writeup/2.png)
+![dashed filename](/assets/img/posts/bandit-writeup/2.png)
 
 There are several ways to read dashed filename. Simply I just use `cat ./-`.
 Additionally, you can use `cat < -`
@@ -69,7 +69,7 @@ The password for the next level is stored in a file called spaces in this filena
 
 ### Solution
 
-![image](/posts/bandit-writeup/3.png)
+![image](/assets/img/posts/bandit-writeup/3.png)
 
 There's the password file, just read it and move on. But... Let's take a closer look at file name. If you use `cat spaces in this filename`, cat thinks we want to read 4 files. So, in this case, I can put filename to `''` or put `\` before spaces character
 
@@ -98,7 +98,7 @@ The password for the next level is stored in a hidden file in the inhere directo
 
 There's a `inhere` directory in bandit3's home dir.
 
-![hidden file](/posts/bandit-writeup/4.png)
+![hidden file](/assets/img/posts/bandit-writeup/4.png)
 
 Use `ls -a` to list all content in a directory, consist of hidden files.
 
@@ -123,7 +123,7 @@ Tip: if your terminal is messed up, try the “reset” command.
 
 There's `inhere` directory, let's see the content of this.
 
-![content of inhere/](/posts/bandit-writeup/5.png)
+![content of inhere/](/assets/img/posts/bandit-writeup/5.png)
 
 Here you can see multiple of dash filename that already learnt in level 1. According to the challenge, the password's stored in the only `HUMAN-READABLE` file (ascii text format).
 
@@ -131,7 +131,7 @@ Here you can see multiple of dash filename that already learnt in level 1. Accor
 find . -exec file {} + | grep ASCII
 ```
 
-![flag bandit4](/posts/bandit-writeup/6.png)
+![flag bandit4](/assets/img/posts/bandit-writeup/6.png)
 
 Flag: _lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR_
 
@@ -240,7 +240,7 @@ The password for the next level is stored in the file data.txt in one of the few
 
 Just `strings` file **data.txt** to meet with the human-readable characteristic and `grep` several '=' character to find the password
 
-![bandit9 password](/posts/bandit-writeup/7.png)
+![bandit9 password](/assets/img/posts/bandit-writeup/7.png)
 
 Flag: _G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s_
 
@@ -353,7 +353,7 @@ bandit12@bandit:~$ cat data.txt
 
 Here as you can see, it's a hexdump which is made by `xxd` command and reversed also by it
 
-![man xxd](/posts/bandit-writeup/8.png)
+![man xxd](/assets/img/posts/bandit-writeup/8.png)
 
 Referring to challenge's description, Let's create a directory in tmp file and make edits on `data.txt` file
 
@@ -455,7 +455,7 @@ The password for the next level is stored in /etc/bandit_pass/bandit14 and can o
 
 This challenge require us to know about **SSH** and **SSH Key**. If you haven't known about it yet, you can read it [here](https://help.ubuntu.com/community/SSH/OpenSSH/Keys "here")
 
-![bandit13 home](/posts/bandit-writeup/9.png)
+![bandit13 home](/assets/img/posts/bandit-writeup/9.png)
 
 Try login the **bandit14**'s box using SSH Key in home directory's bandit13 with the provided information.
 
@@ -524,7 +524,7 @@ Helpful Reading Material
 
 Read the hint, as we can see, the level goal mentions `ssl`, there's a tool called `openssl`. Let's look there:
 
-![bandit15 image-1](/posts/bandit-writeup/10.png)
+![bandit15 image-1](/assets/img/posts/bandit-writeup/10.png)
 
 ```
 s_client
@@ -597,7 +597,7 @@ NOTE: if you have solved this level and see ‘Byebye!’ when trying to log int
 
 We use the private SSH key file to login in **bandit17**'s box
 
-![bandit17 login](/posts/bandit-writeup/11.png)
+![bandit17 login](/assets/img/posts/bandit-writeup/11.png)
 
 "_It is required that your private key files are NOT accessible by others._" So I'll modify the permission of it for only user to read it.
 
@@ -607,13 +607,13 @@ chmod 400 bandit17.private
 
 Then try reconnect and it's successful.
 
-![bandit17 login successfully](/posts/bandit-writeup/12.png)
+![bandit17 login successfully](/assets/img/posts/bandit-writeup/12.png)
 
 There are 2 files as mentioned in the description and we have to findout the only line that has been changed between them.
 
 With the given hints, we just need to know about `diff` command usage.
 
-![diff command](/posts/bandit-writeup/13.png)
+![diff command](/assets/img/posts/bandit-writeup/13.png)
 
 Let's proceed to `diff` two password files!
 
@@ -682,7 +682,7 @@ To gain access to the next level, you should use the setuid binary in the homedi
 ### Solution
 
 When logged in, we can see the highlighted file named "bandit20-do". It seems like a binary file.
-![bandit20-do](/posts/bandit-writeup/14.png)
+![bandit20-do](/assets/img/posts/bandit-writeup/14.png)
 
 I proceed to execute it and then it displayed something like that
 

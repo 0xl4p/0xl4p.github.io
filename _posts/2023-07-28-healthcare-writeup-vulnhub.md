@@ -14,17 +14,17 @@ Download [Healthcare VulnHub](https://www.vulnhub.com/entry/healthcare-1,522/){:
 
 ## Enumeration
 
-![Scan Ports](/posts/Healthcare/scan-ports.PNG)
+![Scan Ports](/assets/img/posts/Healthcare/scan-ports.PNG)
 _Scan Ports and Services_
 
 ```shell
 gobuster dir -u http://10.0.2.9/ -w /usr/share/wordlists/Seclists/Discovery/Web-Content/directory-list-2.3-big.txt -t 30
 ```
 
-![Gobuster](/posts/Healthcare/gobuster.png)
+![Gobuster](/assets/img/posts/Healthcare/gobuster.png)
 _Directory fuzzing_
 
-![Openemr login page](/posts/Healthcare/openemr-login.PNG)
+![Openemr login page](/assets/img/posts/Healthcare/openemr-login.PNG)
 _Openemr login page_
 
 ## Exploitation
@@ -60,7 +60,7 @@ Table: users
 
 Dump được 2 entries như trên, do tools đã crackhash được pasword của user `medical` nên ta dùng tài khoản này để login vô openemr luôn.
 
-![Openemr Interface](/posts/Healthcare/openemr-interface.PNG)
+![Openemr Interface](/assets/img/posts/Healthcare/openemr-interface.PNG)
 _Giao diện sau khi login Openemr_
 
 ## Remote Code Execution
@@ -69,20 +69,20 @@ Sau khi đã đặt chân vào trang quản trị của Openemr v4.1.0, chúng t
 
 Tìm thủ công nơi có thể upload file, khả năng nhất là nơi update thông tin của bệnh nhân/khách hàng. Tiến hành truy cập đến `Patient/Client`>`New/Search`.
 
-![Create New Patient](/posts/Healthcare/create-new-patient.PNG)
+![Create New Patient](/assets/img/posts/Healthcare/create-new-patient.PNG)
 _Tạo mới 1 Patient_
 
 Sau khi tạo xong, search và click vào Patient vừa tạo. Sau đó di chuyển tới `Documents` > `Patient Information` > `Patient Photograph`
 
-![Patient A](/posts/Healthcare/a.PNG)
+![Patient A](/assets/img/posts/Healthcare/a.PNG)
 
-![Upload Page](/posts/Healthcare/upload-page.PNG)
+![Upload Page](/assets/img/posts/Healthcare/upload-page.PNG)
 
 Yah chính nó! Upload reverse shell php lên, chạy file và tạo 1 port listener tại máy local:
 
-![Upload Revshell](/posts/Healthcare/upload-revshell.PNG)
+![Upload Revshell](/assets/img/posts/Healthcare/upload-revshell.PNG)
 
-![RCE](/posts/Healthcare/rce.PNG)
+![RCE](/assets/img/posts/Healthcare/rce.PNG)
 _RCE thành công!_
 
 ## Privilege Escalation

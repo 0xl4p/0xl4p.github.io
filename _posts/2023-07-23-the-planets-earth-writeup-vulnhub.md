@@ -29,7 +29,6 @@ Target IP là `10.0.2.6`. Tiến hành scan all ports:
 nmap -sC -sV 10.0.2.6 -p- -A -T4
 ```
 
-Đọc thêm về `nmap` tại [đây](/assets/img/posts/nmap-network-scanner/)
 
 ![scan ports](/assets/img/posts/earth-walkthrough/scan-ports.png)
 

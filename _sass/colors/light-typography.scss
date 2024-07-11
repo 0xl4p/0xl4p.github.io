@@ -88,6 +88,8 @@
   --prompt-warning-icon-color: #ef9c03;
   --prompt-danger-bg: rgb(248, 215, 218, 0.56);
   --prompt-danger-icon-color: #df3c30;
+  --prompt-question-bg: rgba(236, 218, 153, 0.88);;
+  --prompt-question-icon-color: rgba(230, 151, 5, 0.8);
 
   [class^='prompt-'] {
     --link-underline-color: rgb(219, 216, 216);

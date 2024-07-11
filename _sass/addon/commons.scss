@@ -154,6 +154,7 @@ blockquote {
   @include prompt('info', '\f06a');
   @include prompt('warning', '\f06a');
   @include prompt('danger', '\f071');
+  @include prompt('question','\f059')
 }
 
 kbd {

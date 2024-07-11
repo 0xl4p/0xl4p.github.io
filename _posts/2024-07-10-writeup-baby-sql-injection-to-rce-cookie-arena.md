@@ -79,8 +79,7 @@ Source code:
 </html>
 ```
 
-Trước hết, đọc source code ta thấy được câu truy vấn `$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";`, ngỡ là ta được trở lại những năm 2000 :)). Trigger sqli và nảy sang 1 trang welcome.
-
+Trước hết, đọc source code ta thấy được câu truy vấn `$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";`. Trigger sqli 1 mệnh đề đúng => nảy sang 1 trang welcome, Ngược lại trả về "Incorrect Username or Password" ==> Blind SQLi.
 ![Welcome](/assets/img/posts/Baby-SQL-Injection-to-RCE-CookieArena/2.png)
 
 Như cái tiêu đề và mô tả, chúng ta phải khai thác SQL injection to RCE vì flag nằm trong file hệ thống chứ không nằm trong db. 2 ý tưởng nảy trong đầu của tui:

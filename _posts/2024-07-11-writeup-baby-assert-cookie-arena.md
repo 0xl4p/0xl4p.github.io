@@ -16,7 +16,9 @@ Link Challenge: [here](https://battle.cookiearena.org/challenges/web/baby-assert
 Mô tả:
 
 ```
-Trong PHP, có rất nhiều cách để thay thế lệnh điều khiển If Else. Tuy nhiên, không phải lập trình viên nào cũng lường trước được những hậu quả nghiêm trọng khi sử dụng và thiết lập những tham số an toàn trên môi trường Production.
+Trong PHP, có rất nhiều cách để thay thế lệnh điều khiển If Else. 
+Tuy nhiên, không phải lập trình viên nào cũng lường trước được những hậu quả nghiêm trọng 
+khi sử dụng và thiết lập những tham số an toàn trên môi trường Production.
 ```
 
 ## Exploit
